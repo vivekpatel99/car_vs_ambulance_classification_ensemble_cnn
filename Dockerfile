@@ -21,7 +21,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
     # System deps:
-RUN apt-get install ffmpeg libsm6 libxext6  -y
+RUN apt-get install curl ffmpeg libsm6 libxext6  -y
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
@@ -31,14 +31,20 @@ USER $USERNAME
 
 RUN pwd
 RUN pip install --upgrade pip
-RUN pip install pipx
+RUN pip install poetry
+COPY pyproject.toml .
+COPY poetry.lock .
+# RUN poetry install
 RUN echo "############### "
 RUN echo $(pwd)
-# RUN pip install -r requirements.txt
 
-# RUN pipx install poetry
 ENV PATH="/root/.local/bin:${PATH}"
-# RUN poetry install
+# RUN curl -sSL https://install.python-poetry.org | python3 -
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
+# ENV POETRY_VIRTUALENVS_CREATE=false
+# RUN poetry install $(test "$YOUR_ENV" == production && echo "--only=main") --no-interaction --no-ansi
+
 
 
 EXPOSE 8888
