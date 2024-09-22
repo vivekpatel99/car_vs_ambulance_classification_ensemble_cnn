@@ -1,0 +1,19 @@
+base:
+  random_seed: 42
+
+data_split:
+  test_size: 0.2
+
+
+train:
+  image_size: 224
+  batch_size: 32
+  fine_tune_args:
+    epochs: 8
+    base_lr: 0.01
+
+evaluate:
+  reports_dir: reports
+  metrics_file: 'metrics.json'
+  confusion_matrix_image: 'confusion_matrix.png'
+  confusion_matrix_data: 'confusion_matrix_data.csv'
