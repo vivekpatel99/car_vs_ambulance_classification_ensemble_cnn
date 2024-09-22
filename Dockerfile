@@ -35,13 +35,12 @@ RUN pip install --upgrade pip
 # COPY pyproject.toml .
 # COPY poetry.lock .
 # # RUN poetry install
-RUN echo "############### "
-RUN echo $(pwd)
 
 ENV PATH="/root/.local/bin:${PATH}"
 # RUN curl -sSL https://install.python-poetry.org | python3 -
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+
 # ENV POETRY_VIRTUALENVS_CREATE=false
 # RUN poetry install $(test "$YOUR_ENV" == production && echo "--only=main") --no-interaction --no-ansi
 
