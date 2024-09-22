@@ -8,3 +8,7 @@ progressbar2
 pandas
 opendatasets
 dvc
+python-box
+joblib
+ensure
+-e .

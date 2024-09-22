@@ -30,7 +30,7 @@ RUN apt-get install curl ffmpeg libsm6 libxext6  -y
 USER $USERNAME
 
 RUN pwd
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip setuptools wheel
 # RUN pip install poetry
 # COPY pyproject.toml .
 # COPY poetry.lock .
