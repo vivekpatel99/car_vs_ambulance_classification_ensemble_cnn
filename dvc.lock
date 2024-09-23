@@ -1,0 +1,33 @@
+schema: '2.0'
+stages:
+  data_download:
+    cmd: python src/stages/stage_0_data_download.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_0_data_download.py
+      hash: md5
+      md5: d3902e086da555da4faca498198e216d
+      size: 523
+    outs:
+    - path: dataset/raw
+      hash: md5
+      md5: 92c0ed906ef663cbeba0e8268a25ae97.dir
+      size: 368454056
+      nfiles: 2276
+  data_preprocess_augmentation:
+    cmd: python src/stages/stage_1_data_preprocess_augmentation.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_1_data_preprocess_augmentation.py
+      hash: md5
+      md5: 2de7e45e2e26a75bcfc0613d67789ebe
+      size: 5543
+    outs:
+    - path: dataset/preprocess/test
+      hash: md5
+      md5: d35c4e83d43156eb52fdfc0fba15e41b.dir
+      size: 54160428
+      nfiles: 557
+    - path: dataset/preprocess/train
+      hash: md5
+      md5: 6d3b35cb8c19b35d509c562cb12852ee.dir
+      size: 213199596
+      nfiles: 2227

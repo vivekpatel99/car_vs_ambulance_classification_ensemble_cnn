@@ -17,3 +17,12 @@ evaluate:
   metrics_file: 'metrics.json'
   confusion_matrix_image: 'confusion_matrix.png'
   confusion_matrix_data: 'confusion_matrix_data.csv'
+
+
+paths:
+  dataset_url: https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
+  dataset_dir: dataset/raw
+  dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
+  preprocess_dataset: dataset/preprocess
+  train_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Train
+  labels_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Label

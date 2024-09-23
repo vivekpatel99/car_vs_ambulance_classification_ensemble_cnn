@@ -1,6 +1,1 @@
 
-paths:
-  dataset_url: https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
-  dataset_dir: dataset
-  dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
-  preprocess_dataset: dataset/preprocess
