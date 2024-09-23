@@ -23,3 +23,4 @@ if __name__ == '__main__':
     args_parser.add_argument('--config', dest='config', required=True)
     args = args_parser.parse_args()
     data_download(config_path=args.config)
+

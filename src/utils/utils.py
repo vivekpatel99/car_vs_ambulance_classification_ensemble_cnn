@@ -10,9 +10,17 @@ import logging
 import yaml
 
 from utils.logs import get_logger
+import inspect
 
+logger = get_logger(__name__, log_level=logging.INFO)
 
+def get_function_name() -> str:
+    """_summary_
 
+    Returns:
+        str: _description_
+    """
+    return inspect.currentframe().f_back.f_code.co_name
 
 def read_yaml(yaml_path: Path)-> ConfigBox:
     """reads yaml file and returns
@@ -27,7 +35,7 @@ def read_yaml(yaml_path: Path)-> ConfigBox:
     Returns:
         ConfigBox: ConfigBox type
     """
-    logger = get_logger('read_yaml', log_level=logging.INFO)
+   
     try:
         with open(file=yaml_path, mode='r', encoding='UTF-8') as yaml_file:
             content = yaml.safe_load(yaml_file)
@@ -50,11 +58,13 @@ def download_datasets_from_kaggle(config_path:str)-> None:
     config_path= pathlib.Path(config_path)
     config = read_yaml(yaml_path=config_path)
 
+    logger.info(f'dataset url: {config.paths.dataset_dir}')
+    
     # Dowload the dataset
     data_dir = pathlib.Path(config.paths.dataset_dir)
     data_dir.mkdir(exist_ok=True)
-    if not os.path.isdir(config.paths.dataset_dir):
-        od.download(config.paths.dataset_dir)
+ 
+    od.download(dataset_id_or_url=config.paths.dataset_url,data_dir=config.paths.dataset_dir)
 
 
     if __name__ == '__main__':
