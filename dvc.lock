@@ -7,6 +7,12 @@ stages:
       hash: md5
       md5: d3902e086da555da4faca498198e216d
       size: 523
+    params:
+      params.yaml:
+        paths.dataset_dir: dataset/raw
+        paths.dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
+        paths.dataset_url: 
+          https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
     outs:
     - path: dataset/raw
       hash: md5
@@ -20,6 +26,11 @@ stages:
       hash: md5
       md5: 2de7e45e2e26a75bcfc0613d67789ebe
       size: 5543
+    params:
+      params.yaml:
+        paths.labels_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Label
+        paths.preprocess_dataset: dataset/preprocess
+        paths.train_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Train
     outs:
     - path: dataset/preprocess/test
       hash: md5
@@ -28,6 +39,6 @@ stages:
       nfiles: 557
     - path: dataset/preprocess/train
       hash: md5
-      md5: 6d3b35cb8c19b35d509c562cb12852ee.dir
-      size: 213199596
+      md5: b8e24a0f7c309a1f8fd434379dcce3ff.dir
+      size: 212847539
       nfiles: 2227

@@ -3,12 +3,21 @@ stages:
     cmd: python src/stages/stage_0_data_download.py --config=params.yaml
     deps:
     - src/stages/stage_0_data_download.py
+    params:
+    - paths.dataset_url
+    - paths.dataset_dir
+    - paths.dataset_path
     outs:
     - dataset/raw
+
   data_preprocess_augmentation:
     cmd: python src/stages/stage_1_data_preprocess_augmentation.py --config=params.yaml
     deps:
     - src/stages/stage_1_data_preprocess_augmentation.py
+    params:
+    - paths.preprocess_dataset
+    - paths.train_dir
+    - paths.labels_dir
     outs:
     - dataset/preprocess/train
     - dataset/preprocess/test
