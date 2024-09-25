@@ -30,6 +30,8 @@ paths:
   preprocess_dataset: dataset/preprocess
   train_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Train
   labels_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Label
+  preprocessed_train: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/train
+  preprocessed_val: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/test
   lenet_path: models/lenet.h5
   mini_vgg_net_path: models/mini_vgg_net.h5
   shallownet_path: models/shallownet.h5
