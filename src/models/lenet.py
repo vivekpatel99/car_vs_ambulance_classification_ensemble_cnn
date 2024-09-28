@@ -21,7 +21,7 @@ class LeNet(BaseModel):
 
         self.params = utils.read_yaml(yaml_path=params_yaml)
         self.model_params = self.params.train.lenet
-        self.logger = get_logger(__name__, log_level=logging.INFO)
+        self.log = get_logger(__name__, log_level=logging.INFO)
         self.image_size = self.params.train.image_size
         self.loss = self.params.train.binary_crossentropy
         self.batch_size = self.params.train.batch_size
@@ -55,40 +55,5 @@ class LeNet(BaseModel):
             Dense(1, activation='sigmoid'),
         ])
 
-        self.logger.info('LeNet model built successfully.')
+        self.log.info('LeNet model built successfully.')
         return self._model
-
-    # def get_summary(self):  # -> Any:
-    #     return self._model.summary()
-
-    # # @ensure_annotations
-    # def train(self, train_data: tf.data.Dataset,
-    #           val_data: tf.data.Dataset,
-    #           optimizer: tf.keras.Optimizer,
-    #           verbose: int = 1) -> dict:
-
-    #     self._model.compile(loss=self.loss,
-    #                         optimizer=optimizer,
-    #                         metrics=self.metrics)
-
-    #     history = self._model.fit(train_data,
-    #                               validation_data=val_data,
-    #                               batch_size=self.batch_size,
-    #                               epochs=self.epochs,
-    #                               verbose=verbose)
-    #     self.history = history.history
-    #     self.logger.info('trained')
-    #     return history
-
-    # # @ensure_annotations
-    # def evaluate(self, test_data: np.ndarray) -> np.ndarray:
-    #     """
-    #     """
-    #     assert test_data.ndim == 4,  "Input array/image must be 4-dimensional"
-
-    #     predictions = self._model.predict(test_data,
-    #                                       batch_size=self.batch_size)
-
-    #     y_pred = (predictions > 0.5).astype(int)
-    #     self.logger.info('evaluation completed')
-    #     return y_pred
