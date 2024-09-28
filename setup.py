@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 __version__ = "0.1.0"
 
 REPO_NAME = "car_vs_ambulance_classification_ensemble_cnn"
-AUTHOR_USER_NAME = "entbappy"
+AUTHOR_USER_NAME = "Vivek Patel"
 SRC_REPO = "src"
 AUTHOR_EMAIL = "vivpatel99@gmail.com"
 

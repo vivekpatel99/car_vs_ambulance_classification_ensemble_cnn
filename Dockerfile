@@ -3,7 +3,7 @@
 
 FROM tensorflow/tensorflow:latest-gpu-jupyter
 
-WORKDIR .
+WORKDIR /code
 
 # https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
 ARG USERNAME=ultron
@@ -20,7 +20,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-    # System deps:
+# System deps:
 RUN apt-get install curl ffmpeg libsm6 libxext6  -y
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
@@ -28,23 +28,12 @@ RUN apt-get install curl ffmpeg libsm6 libxext6  -y
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 USER $USERNAME
-
-RUN pwd
-RUN pip install --upgrade pip setuptools wheel
-# RUN pip install poetry
-# COPY pyproject.toml .
-# COPY poetry.lock .
-# # RUN poetry install
-
 ENV PATH="/root/.local/bin:${PATH}"
-# RUN curl -sSL https://install.python-poetry.org | python3 -
-COPY requirements.txt .
-RUN pip install -r requirements.txt
 
-# ENV POETRY_VIRTUALENVS_CREATE=false
-# RUN poetry install $(test "$YOUR_ENV" == production && echo "--only=main") --no-interaction --no-ansi
+RUN pip install --upgrade pip setuptools wheel
 
-
+COPY . /code/
+# RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8888
 

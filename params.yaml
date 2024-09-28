@@ -8,15 +8,20 @@ data_split:
 train:
   image_size: 224
   batch_size: 32
+  binary_crossentropy: "binary_crossentropy"
   fine_tune_args:
-    epochs: 10
-  letnet:
+    
+  lenet:
       base_lr: 0.01
+      epochs: 2
   mini_vgg_net:
       base_lr: 0.01
+      epochs: 10
   shallownet:
       base_lr: 0.01
+      epochs: 10
 evaluate:
+  metrics: ["accuracy", "precision", "recall"]
   reports_dir: reports
   metrics_file: 'metrics.json'
   confusion_matrix_image: 'confusion_matrix.png'
@@ -25,7 +30,7 @@ evaluate:
 
 paths:
   dataset_url: https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
-  dataset_dir: dataset/raw
+  raw_dataset_dir: dataset/raw
   dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
   preprocess_dataset: dataset/preprocess
   train_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Train
