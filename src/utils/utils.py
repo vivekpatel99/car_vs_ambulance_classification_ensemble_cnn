@@ -8,7 +8,7 @@ from box import ConfigBox
 from pathlib import Path
 import logging
 import yaml
-
+import pathlib
 from utils.logs import get_logger
 import inspect
 
@@ -22,7 +22,8 @@ def get_function_name() -> str:
     """
     return inspect.currentframe().f_back.f_code.co_name
 
-def read_yaml(yaml_path: Path)-> ConfigBox:
+@ensure_annotations
+def read_yaml(yaml_path: str)-> ConfigBox:
     """reads yaml file and returns
 
     Args:
@@ -35,7 +36,7 @@ def read_yaml(yaml_path: Path)-> ConfigBox:
     Returns:
         ConfigBox: ConfigBox type
     """
-   
+    yaml_path= pathlib.Path(yaml_path)
     try:
         with open(file=yaml_path, mode='r', encoding='UTF-8') as yaml_file:
             content = yaml.safe_load(yaml_file)
@@ -47,7 +48,7 @@ def read_yaml(yaml_path: Path)-> ConfigBox:
     except Exception as e:
         raise e
 
-    
+@ensure_annotations    
 def download_datasets_from_kaggle(config_path:str)-> None:
     """_summary_
 
@@ -55,7 +56,6 @@ def download_datasets_from_kaggle(config_path:str)-> None:
         dataset_url (str): data set url 
         dataset_dir (str): dataset download diractory 
     """
-    config_path= pathlib.Path(config_path)
     config = read_yaml(yaml_path=config_path)
 
     logger.info(f'dataset url: {config.paths.dataset_dir}')
@@ -69,3 +69,6 @@ def download_datasets_from_kaggle(config_path:str)-> None:
 
     if __name__ == '__main__':
         read_yaml(yaml_path='../../config/config.yml')
+
+def clear_tf_session()-> None:
+    tf.keras.backend.clear_session()
