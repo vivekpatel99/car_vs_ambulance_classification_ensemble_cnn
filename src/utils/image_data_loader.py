@@ -5,8 +5,6 @@ from ensure import ensure_annotations
 import logging
 from utils.logs import get_logger
 
-logger = get_logger(__name__, log_level=logging.INFO)
-
 
 class ImageDataLoader:
 
@@ -18,6 +16,7 @@ class ImageDataLoader:
         self.val_ds = None
         self.train_dir = params_config.paths.preprocessed_train
         self.val_dir = params_config.paths.preprocessed_val
+        self.log = get_logger(__name__, log_level=logging.INFO)
 
     @ensure_annotations
     def load_image_dataset(self, prefetch: bool = True) -> tuple:
@@ -51,6 +50,6 @@ class ImageDataLoader:
             self.val_ds = self.val_ds.cache()\
                 .prefetch(buffer_size=AUTOTUNE)
 
-        logger.info('load_image_dataset completed')
+        self.log.info('load_image_dataset completed')
 
         return (self.train_ds, self.val_ds)
