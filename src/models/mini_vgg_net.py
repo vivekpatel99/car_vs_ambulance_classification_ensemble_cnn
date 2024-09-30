@@ -13,7 +13,6 @@ import logging
 from utils import utils
 from utils.logs import get_logger
 
-logger = get_logger(__name__, log_level=logging.INFO)
 
 
 class MiniVGGNet(BaseModel):
