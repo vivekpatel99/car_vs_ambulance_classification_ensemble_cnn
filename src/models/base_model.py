@@ -70,24 +70,3 @@ class BaseModel(ABC):
         self.log.info('Evaluation completed')
         return y_pred
 
-    # Plot accuracies
-    def plot_accuracies(self):
-        train_accuracy = self._history['accuracy']
-        val_accuracy = self._history['val_accuracy']
-        plt.plot(np.arange(0, 20), train_accuracy,
-                 '-x', label='train_accuracy')
-        plt.plot(np.arange(0, 20), val_accuracy, '-x', label='val_accuracy')
-        plt.xlabel('epoch')
-        plt.legend(['Train Accuracy', 'Validation Accuracy'])
-        plt.ylabel('train_accuracy/val_accuracy')
-        plt.title('Accuracy vs. No. of epochs')
-
-    def plot_losses(self):
-        train_losses = self._history['loss']
-        val_losses = self._history['val_loss']
-        plt.plot(np.arange(0, 20), train_losses, '-bx', label='train_losses')
-        plt.plot(np.arange(0, 20), val_losses, '-rx', label='val_losses')
-        plt.xlabel('epoch')
-        plt.ylabel('loss')
-        plt.legend(['Train Loss', 'Validation Loss'])
-        plt.title('Loss vs. No. of epochs')
