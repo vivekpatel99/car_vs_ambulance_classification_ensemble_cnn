@@ -1,5 +1,6 @@
 from abc import ABC,  abstractmethod
 from ast import Tuple
+from git import Object
 from matplotlib import pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -31,19 +32,24 @@ class BaseModel(ABC):
         """Get the summary of the model architecture."""
         return self._model.summary() if self._model else None
 
+    def model_compile(self, optimizer: tf.keras.Optimizer) -> Object:
+        """Compile the model with the provided optimizer."""
+        return self._model.compile(loss=self.loss,
+                                   optimizer=optimizer,
+                                   metrics=self.metrics)
+
     # @ensure_annotations
+
     def train(self, train_data: tf.data.Dataset,
               val_data: tf.data.Dataset,
               optimizer: tf.keras.Optimizer,
-              verbose: int = 1) -> dict:
+              verbose: int = 1, ) -> dict:
         """Train the model on the provided data."""
         if not self._model:
             raise ValueError(
                 "Model has not been built. Call `build` method first.")
 
-        self._model.compile(loss=self.loss,
-                            optimizer=optimizer,
-                            metrics=self.metrics)
+        self.model_compile(optimizer=optimizer)
 
         history = self._model.fit(train_data,
                                   validation_data=val_data,
@@ -69,4 +75,3 @@ class BaseModel(ABC):
         y_pred = (predictions > 0.5).astype(int)
         self.log.info('Evaluation completed')
         return y_pred
-

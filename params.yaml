@@ -4,29 +4,33 @@ base:
 data_split:
   test_size: 0.2
 
-
 train:
   image_size: 224
   batch_size: 32
   binary_crossentropy: "binary_crossentropy"
-  fine_tune_args:
-    
+  if_fine_tune: true
+  fine_tune:
+    models: ["lenet"] #, "mini_vgg_net", "shallownet"]
+    base_lr: [0.01, 0.001, 0.0001]
+    epochs: [10, 20, 30]
+    optimizer: ["adam"] #, "sgd"]
+
   lenet:
-      base_lr: 0.01
-      epochs: 2
+    base_lr: 0.01
+    epochs: 2
   mini_vgg_net:
-      base_lr: 0.01
-      epochs: 10
+    base_lr: 0.01
+    epochs: 10
   shallownet:
-      base_lr: 0.01
-      epochs: 10
+    base_lr: 0.01
+    epochs: 10
+
 evaluate:
   metrics: ["accuracy", "precision", "recall"]
   reports_dir: reports
-  metrics_file: 'metrics.json'
-  confusion_matrix_image: 'confusion_matrix.png'
-  confusion_matrix_data: 'confusion_matrix_data.csv'
-
+  metrics_file: "metrics.json"
+  confusion_matrix_image: "confusion_matrix.png"
+  confusion_matrix_data: "confusion_matrix_data.csv"
 
 paths:
   dataset_url: https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
