@@ -29,4 +29,4 @@ Here’s a bullet-point description of the dataset:
 1. Install VS Code 
 2. Install Dev Containers (ms-vscode-remote.remote-containers) and python extensions (ms-python.autopep8)
 3. Press Ctrl + P and type `open container`
-    It will pull official Tensorflow docker image from Nvidia and setup the project by install requirements.txt
+    It will pull official Tensorflow docker image from Nvidia (tensorflow/tensorflow:latest-gpu-jupyter) and setup the project by install requirements.txt
