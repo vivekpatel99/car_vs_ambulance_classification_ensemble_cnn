@@ -2,10 +2,10 @@
 import os
 import pathlib
 import opendatasets as od
+import tensorflow as tf
 from ensure import ensure_annotations
 from box.exceptions import BoxValueError
 from box import ConfigBox
-from pathlib import Path
 import logging
 import yaml
 import pathlib
@@ -76,3 +76,17 @@ def download_datasets_from_kaggle(config_path: str) -> None:
 
 def clear_tf_session() -> None:
     tf.keras.backend.clear_session()
+
+
+def limit_gpu_memory_growth() -> None:
+    gpus = tf.config.experimental.list_physical_devices('GPU')
+    if gpus:
+        try:
+            for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, True)
+        except RuntimeError as e:
+            print(e)
+
+def gpu_clean_up() -> None:
+    clear_tf_session()
+    limit_gpu_memory_growth()

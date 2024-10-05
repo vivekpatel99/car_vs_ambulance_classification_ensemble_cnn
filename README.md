@@ -26,17 +26,7 @@ Here’s a bullet-point description of the dataset:
 
 # HowTo
 ## Setup
-1. Setup using pip
-```bash
-python -m venv .venv && \
-. .venv/bin/activate && \
-pip install --upgrade pip && \
-pip install -r requirements.txt
-```
-2. setup using poetry
-```bash
-python -m venv .venv && \
-. .venv/bin/activate && \
-poetry install 
-```
-3. 
+1. Install VS Code 
+2. Install Dev Containers (ms-vscode-remote.remote-containers) and python extensions (ms-python.autopep8)
+3. Press Ctrl + P and type `open container`
+    It will pull official Tensorflow docker image from Nvidia and setup the project by install requirements.txt

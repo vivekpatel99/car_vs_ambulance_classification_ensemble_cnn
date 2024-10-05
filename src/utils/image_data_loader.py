@@ -44,8 +44,7 @@ class ImageDataLoader:
             # https://www.tensorflow.org/tutorials/images/classification
             AUTOTUNE = tf.data.AUTOTUNE
             self.train_ds = self.train_ds.cache()\
-                .shuffle(1000)\
-                .prefetch(buffer_size=AUTOTUNE)
+                .shuffle(1000).prefetch(buffer_size=AUTOTUNE)
 
             self.val_ds = self.val_ds.cache()\
                 .prefetch(buffer_size=AUTOTUNE)

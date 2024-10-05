@@ -10,16 +10,24 @@ from utils.logs import get_logger
 
 
 class ShallowNet(BaseModel):
-    def __init__(self, params_yaml: str) -> None:
+    def __init__(self,
+                 optimizer_name: str,
+                 image_size: int,
+                 loss: str,
+                 batch_size: int = 32,
+                 epochs: int = 10,
+                 learning_rate: float = 1e-3,
+                 metrics: list = [],
+                 ) -> None:
         super().__init__()
-        self.params = utils.read_yaml(yaml_path=params_yaml)
-        self.model_params = self.params.train.shallownet
         self.log = get_logger(__name__, log_level=logging.INFO)
-        self.image_size = self.params.train.image_size
-        self.loss = self.params.train.binary_crossentropy
-        self.batch_size = self.params.train.batch_size
-        self.epochs = self.model_params.epochs
-        self.metrics = self.params.evaluate.metrics
+        self.image_size = image_size
+        self.loss = loss
+        self.batch_size = batch_size
+        self.epochs = epochs
+        self.metrics = metrics
+        self.optimizer_name = optimizer_name
+        self.learning_rate = learning_rate
 
     def build(self) -> Sequential:
         """Build the ShallowNet model architecture."""
