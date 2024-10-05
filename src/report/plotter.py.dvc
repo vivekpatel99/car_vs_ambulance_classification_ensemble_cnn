@@ -1,5 +1,5 @@
 outs:
-- md5: b60fffec67c7a80f31e71318f1bc3442
-  size: 2405
+- md5: 140a36e658a2b6d124c1b2c8a2c0dcbb
+  size: 2240
   hash: md5
   path: plotter.py
