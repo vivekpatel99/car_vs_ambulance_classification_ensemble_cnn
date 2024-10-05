@@ -1,22 +1,22 @@
 """_summary_
 """
 
-import logging
-from utils.logs import get_logger
-from utils import utils
-from box import ConfigBox
-from tqdm import tqdm
-import glob
-import cv2
-from tensorflow.keras.layers import Rescaling, RandomFlip, RandomRotation
-from sklearn.calibration import LabelEncoder
-import numpy as np
-import os
-import pathlib
 import argparse
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 tf.get_logger().setLevel('ERROR')
+import pathlib
+import os
+import numpy as np
+from sklearn.calibration import LabelEncoder
+from tensorflow.keras.layers import Rescaling, RandomFlip, RandomRotation
+import cv2
+import glob
+from tqdm import tqdm
+from box import ConfigBox
+from utils import utils
+from utils.logs import get_logger
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +100,9 @@ def data_preprocess_augmentation(config_path: str) -> None:
         config_path (str): _description_
     """
 
-    config = utils.read_yaml(yaml_path=config_path)
+    config = pathlib.Path(config_path)
+
+    config = utils.read_yaml(yaml_path=config)
 
     images_arr, labels_arr = load_and_resize_data(config)
 
@@ -150,11 +152,10 @@ def data_preprocess_augmentation(config_path: str) -> None:
 
     logger.info('%s compeleted', utils.get_function_name())
 
-
 if __name__ == '__main__':
 
     args_parser = argparse.ArgumentParser()
-    args_parser.add_argument('--config', default='params.yaml')
+    args_parser.add_argument('--config', dest='config', required=True)
     args = args_parser.parse_args()
 
     data_preprocess_augmentation(config_path=args.config)

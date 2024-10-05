@@ -5,8 +5,8 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: c222d0954eac2b0c4df3ecb6ec0915ad
-      size: 1322
+      md5: b571b0061da325dd74292b03de15acaa
+      size: 1449
       isexec: true
     - path: src/stages/stage_0_data_download.py
       hash: md5
@@ -27,15 +27,10 @@ stages:
   data_preprocess_augmentation:
     cmd: python src/stages/stage_1_data_preprocess_augmentation.py --config=params.yaml
     deps:
-    - path: params.yaml
-      hash: md5
-      md5: c222d0954eac2b0c4df3ecb6ec0915ad
-      size: 1322
-      isexec: true
     - path: src/stages/stage_1_data_preprocess_augmentation.py
       hash: md5
-      md5: 7e6fe1ffa4b25c38e21659bdd210675c
-      size: 5502
+      md5: 2de7e45e2e26a75bcfc0613d67789ebe
+      size: 5543
     params:
       params.yaml:
         paths.labels_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Label
@@ -49,41 +44,6 @@ stages:
       nfiles: 557
     - path: dataset/preprocess/train
       hash: md5
-      md5: c4e017b48cb5519da9faac99ff6c72d8.dir
-      size: 213306856
+      md5: b8e24a0f7c309a1f8fd434379dcce3ff.dir
+      size: 212847539
       nfiles: 2227
-  train:
-    cmd: python src/stages/stage_2_train.py --config=params.yaml
-    deps:
-    - path: params.yaml
-      hash: md5
-      md5: c222d0954eac2b0c4df3ecb6ec0915ad
-      size: 1322
-      isexec: true
-    - path: src/stages/stage_2_train.py
-      hash: md5
-      md5: 98e6b9f7317ab6d62a90f18a2ff87d1d
-      size: 1435
-    params:
-      params.yaml:
-        paths.preprocessed_train: 
-          /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/train
-        paths.preprocessed_val: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/test
-        paths.trained_model_path: models
-    outs:
-    - path: models/lenet.keras
-      hash: md5
-      md5: aa58eee8c158bdcc131dfe7fafc0936c
-      size: 313748263
-    - path: models/mini_vgg_net.keras
-      hash: md5
-      md5: a5bf90965e7b358ab729313e3ed6b987
-      size: 1234026525
-    - path: models/shallownet.keras
-      hash: md5
-      md5: 1df4dd07a04f0b9f40eb65787ea25bce
-      size: 6444044
-    - path: models/tuned_hyperparams.json
-      hash: md5
-      md5: addffaecdd8d1db345d3ef2a40cb58ad
-      size: 228

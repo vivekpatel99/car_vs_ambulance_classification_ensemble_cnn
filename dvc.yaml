@@ -16,12 +16,10 @@ stages:
     cmd: python src/stages/stage_1_data_preprocess_augmentation.py --config=params.yaml
     deps:
       - src/stages/stage_1_data_preprocess_augmentation.py
-      - params.yaml
     params:
       - paths.preprocess_dataset
       - paths.train_dir
       - paths.labels_dir
-
     outs:
       - dataset/preprocess/train
       - dataset/preprocess/test
@@ -30,13 +28,13 @@ stages:
     cmd: python src/stages/stage_2_train.py --config=params.yaml
     deps:
       - src/stages/stage_2_train.py
-      - params.yaml
     params:
       - paths.preprocessed_train
       - paths.preprocessed_val
-      - paths.trained_model_path
+      - paths.lenet_path
+      - paths.mini_vgg_net_path
+      - paths.shallownet_path
     outs:
-      - models/lenet.keras
-      - models/mini_vgg_net.keras
-      - models/shallownet.keras
-      - models/tuned_hyperparams.json
+      - models/lenet.h5
+      - models/mini_vgg_net.h5
+      - models/shallownet.h5

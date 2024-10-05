@@ -43,7 +43,7 @@ def train(params_yaml: str = 'params.yaml') -> None:
 
 
 if __name__ == '__main__':
-    args_parser = argparse.ArgumentParser()
-    args_parser.add_argument('--config', default='params.yaml')
-    args = args_parser.parse_args()
-    train(params_yaml=args.config)
+    args = argparse.ArgumentParser()
+    args.add_argument('--config', default='params.yaml')
+    parsed_args = args.parse_args()
+    train(params_yaml=parsed_args.config)
