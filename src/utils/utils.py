@@ -14,6 +14,7 @@ import inspect
 
 logger = get_logger(__name__, log_level=logging.INFO)
 
+
 def get_function_name() -> str:
     """_summary_
 
@@ -22,8 +23,9 @@ def get_function_name() -> str:
     """
     return inspect.currentframe().f_back.f_code.co_name
 
+
 @ensure_annotations
-def read_yaml(yaml_path: str)-> ConfigBox:
+def read_yaml(yaml_path: str) -> ConfigBox:
     """reads yaml file and returns
 
     Args:
@@ -36,7 +38,7 @@ def read_yaml(yaml_path: str)-> ConfigBox:
     Returns:
         ConfigBox: ConfigBox type
     """
-    yaml_path= pathlib.Path(yaml_path)
+
     try:
         with open(file=yaml_path, mode='r', encoding='UTF-8') as yaml_file:
             content = yaml.safe_load(yaml_file)
@@ -48,8 +50,9 @@ def read_yaml(yaml_path: str)-> ConfigBox:
     except Exception as e:
         raise e
 
-@ensure_annotations    
-def download_datasets_from_kaggle(config_path:str)-> None:
+
+# @ensure_annotations
+def download_datasets_from_kaggle(config_path: str) -> None:
     """_summary_
 
     Args:
@@ -58,17 +61,18 @@ def download_datasets_from_kaggle(config_path:str)-> None:
     """
     config = read_yaml(yaml_path=config_path)
 
-    logger.info(f'dataset url: {config.paths.dataset_dir}')
-    
-    # Dowload the dataset
-    data_dir = pathlib.Path(config.paths.dataset_dir)
-    data_dir.mkdir(exist_ok=True)
- 
-    od.download(dataset_id_or_url=config.paths.dataset_url,data_dir=config.paths.dataset_dir)
+    logger.info(f'Raw dataset url: {config.paths.raw_dataset_dir}')
 
+    # Dowload the dataset
+    data_dir = pathlib.Path(config.paths.raw_dataset_dir)
+    data_dir.mkdir(exist_ok=True)
+
+    od.download(dataset_id_or_url=config.paths.dataset_url,
+                data_dir=config.paths.raw_dataset_dir)
 
     if __name__ == '__main__':
         read_yaml(yaml_path='../../config/config.yml')
 
-def clear_tf_session()-> None:
+
+def clear_tf_session() -> None:
     tf.keras.backend.clear_session()

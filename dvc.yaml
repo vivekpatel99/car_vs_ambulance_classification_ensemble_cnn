@@ -2,22 +2,39 @@ stages:
   data_download:
     cmd: python src/stages/stage_0_data_download.py --config=params.yaml
     deps:
-    - src/stages/stage_0_data_download.py
+      - src/stages/stage_0_data_download.py
+      - params.yaml
     params:
-    - paths.dataset_url
-    - paths.dataset_dir
-    - paths.dataset_path
+      - paths.dataset_url
+      - paths.raw_dataset_dir
+      - paths.dataset_path
     outs:
-    - dataset/raw
+      - dataset/raw
+    always_changed: false
 
   data_preprocess_augmentation:
     cmd: python src/stages/stage_1_data_preprocess_augmentation.py --config=params.yaml
     deps:
-    - src/stages/stage_1_data_preprocess_augmentation.py
+      - src/stages/stage_1_data_preprocess_augmentation.py
     params:
-    - paths.preprocess_dataset
-    - paths.train_dir
-    - paths.labels_dir
+      - paths.preprocess_dataset
+      - paths.train_dir
+      - paths.labels_dir
     outs:
-    - dataset/preprocess/train
-    - dataset/preprocess/test
+      - dataset/preprocess/train
+      - dataset/preprocess/test
+
+  train:
+    cmd: python src/stages/stage_2_train.py --config=params.yaml
+    deps:
+      - src/stages/stage_2_train.py
+    params:
+      - paths.preprocessed_train
+      - paths.preprocessed_val
+      - paths.lenet_path
+      - paths.mini_vgg_net_path
+      - paths.shallownet_path
+    outs:
+      - models/lenet.h5
+      - models/mini_vgg_net.h5
+      - models/shallownet.h5

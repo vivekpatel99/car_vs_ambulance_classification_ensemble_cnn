@@ -3,16 +3,21 @@ stages:
   data_download:
     cmd: python src/stages/stage_0_data_download.py --config=params.yaml
     deps:
+    - path: params.yaml
+      hash: md5
+      md5: b571b0061da325dd74292b03de15acaa
+      size: 1449
+      isexec: true
     - path: src/stages/stage_0_data_download.py
       hash: md5
-      md5: d3902e086da555da4faca498198e216d
-      size: 523
+      md5: 744d5f67337f60dc3d8c0d3ccc7d5d53
+      size: 575
     params:
       params.yaml:
-        paths.dataset_dir: dataset/raw
         paths.dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
         paths.dataset_url: 
           https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
+        paths.raw_dataset_dir: dataset/raw
     outs:
     - path: dataset/raw
       hash: md5

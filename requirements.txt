@@ -11,4 +11,5 @@ dvc
 python-box
 joblib
 ensure
+keras_tuner
 -e .
