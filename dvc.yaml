@@ -31,9 +31,7 @@ stages:
     params:
       - paths.preprocessed_train
       - paths.preprocessed_val
-      - paths.lenet_path
-      - paths.mini_vgg_net_path
-      - paths.shallownet_path
+      - paths.trained_model_path
     outs:
       - models/lenet.h5
       - models/mini_vgg_net.h5

@@ -164,4 +164,5 @@ dataset/
 
 kaggle.json
 tunning_dir/
-*.keras
+models/*.keras
+tuned_hyperparams.json
