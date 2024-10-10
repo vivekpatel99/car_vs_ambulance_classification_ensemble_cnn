@@ -86,7 +86,7 @@ class BaseModel(ABC):
         self.log.info('Training completed.')
         return self._history
 
-    def evaluate(self, test_data: tf.data.Dataset) -> np.ndarray:
+    def model_evaluate(self, test_data: tf.data.Dataset) -> np.ndarray:
         """Evaluate the model on the provided test data."""
         if not self._model:
             raise ValueError(

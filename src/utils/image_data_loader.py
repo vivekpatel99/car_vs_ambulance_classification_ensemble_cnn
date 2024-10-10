@@ -48,6 +48,7 @@ class ImageDataLoader:
 
             self.val_ds = self.val_ds.cache()\
                 .prefetch(buffer_size=AUTOTUNE)
+            self.log.info('load_image_dataset are prefetched')
 
         self.log.info('load_image_dataset completed')
 

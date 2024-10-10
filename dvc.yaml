@@ -33,6 +33,16 @@ stages:
       - paths.preprocessed_val
       - paths.trained_model_path
     outs:
-      - models/lenet.h5
-      - models/mini_vgg_net.h5
-      - models/shallownet.h5
+      - models/lenet.keras
+      - models/mini_vgg_net.keras
+      - models/shallownet.keras
+
+  evaluate:
+    cmd: python src/stages/stage_3_evaluate.py --config=params.yaml
+    deps:
+      - src/stages/stage_3_evaluate.py
+    params:
+      - paths.preprocessed_test
+      - paths.trained_model_path
+    outs:
+      - reports

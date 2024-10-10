@@ -6,7 +6,7 @@ data_split:
 
 train:
   image_size: 224
-  batch_size: 16
+  batch_size: 32
   loss: "binary_crossentropy"
   if_fine_tune: true
   fine_tune_args:
@@ -29,10 +29,8 @@ train:
 
 evaluate:
   metrics: ["accuracy", "precision", "recall"]
-  reports_dir: reports
-  metrics_file: "metrics.json"
+  reports_dir: src/report
   confusion_matrix_image: "confusion_matrix.png"
-  confusion_matrix_data: "confusion_matrix_data.csv"
 
 paths:
   dataset_url: https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data

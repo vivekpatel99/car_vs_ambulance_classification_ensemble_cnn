@@ -1,5 +1,6 @@
 
-import os
+import numpy as np
+
 import pathlib
 import opendatasets as od
 import tensorflow as tf
@@ -74,6 +75,15 @@ def download_datasets_from_kaggle(config_path: str) -> None:
         read_yaml(yaml_path='../../config/config.yml')
 
 
+def convert_to_labels(dataset: tf.data.Dataset) -> list:
+    labels_list = []
+    for _, labels in dataset:
+        labels_list.append(labels.numpy())
+
+    # Convert to a flat numpy array
+    return np.concatenate(labels_list)
+
+
 def clear_tf_session() -> None:
     tf.keras.backend.clear_session()
 
@@ -86,6 +96,7 @@ def limit_gpu_memory_growth() -> None:
                 tf.config.experimental.set_memory_growth(gpu, True)
         except RuntimeError as e:
             print(e)
+
 
 def gpu_clean_up() -> None:
     clear_tf_session()

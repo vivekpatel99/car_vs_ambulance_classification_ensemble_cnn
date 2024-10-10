@@ -5,8 +5,8 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: c222d0954eac2b0c4df3ecb6ec0915ad
-      size: 1322
+      md5: c39c9f6eed80f5973c20d6bd3f567e8a
+      size: 1238
       isexec: true
     - path: src/stages/stage_0_data_download.py
       hash: md5
@@ -47,3 +47,29 @@ stages:
       md5: c4e017b48cb5519da9faac99ff6c72d8.dir
       size: 213306856
       nfiles: 2227
+  train:
+    cmd: python src/stages/stage_2_train.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_2_train.py
+      hash: md5
+      md5: bc65bdb4f6a248246a5346da2360e5b3
+      size: 1428
+    params:
+      params.yaml:
+        paths.preprocessed_train: 
+          /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/train
+        paths.preprocessed_val: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/test
+        paths.trained_model_path: models
+    outs:
+    - path: models/lenet.keras
+      hash: md5
+      md5: e5eb7e7c95e3c0545edf192b83466c28
+      size: 313748262
+    - path: models/mini_vgg_net.keras
+      hash: md5
+      md5: c4471f17f66bcb34774181f0238d5929
+      size: 1234026525
+    - path: models/shallownet.keras
+      hash: md5
+      md5: 1ed25c4516186cb0b76a27c163187da7
+      size: 19298965

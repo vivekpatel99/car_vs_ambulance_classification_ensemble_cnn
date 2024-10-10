@@ -1,5 +1,6 @@
 
 import logging
+from pathlib import Path
 
 
 from box import ConfigBox
@@ -154,7 +155,7 @@ def dump_hyper_params_to_json(config, log, tune_params_dict) -> None:
         The best learning rate.
     """
     try:
-        with open(f"{config.paths.trained_model_path}/tuned_hyperparams.json", "w") as fp:
+        with open(Path(config.paths.trained_model_path)/"tuned_hyperparams.json", "w") as fp:
             json.dump(obj=tune_params_dict, fp=fp)
 
     except IOError as e:
