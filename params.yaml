@@ -1,0 +1,45 @@
+base:
+  random_seed: 42
+
+data_split:
+  test_size: 0.2
+
+train:
+  image_size: 224
+  batch_size: 32
+  loss: "binary_crossentropy"
+  if_fine_tune: true
+  fine_tune_args:
+    models: ["lenet", "mini_vgg_net", "shallownet"]
+    lr:
+      max: 0.01
+      min: 0.0001
+    epochs: 2
+    optimizers: ["adam", "sgd"]
+
+  lenet:
+    base_lr: 0.01
+    epochs: 2
+  mini_vgg_net:
+    base_lr: 0.01
+    epochs: 10
+  shallownet:
+    base_lr: 0.01
+    epochs: 10
+
+evaluate:
+  metrics: ["accuracy", "precision", "recall"]
+  reports_dir: src/reports
+  results_dir: src/reports/results
+  confusion_matrix_image: "confusion_matrix.png"
+
+paths:
+  dataset_url: https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
+  raw_dataset_dir: dataset/raw
+  dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
+  preprocess_dataset: dataset/preprocess
+  train_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Train
+  labels_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Label
+  preprocessed_train: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/train
+  preprocessed_val: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/test
+  trained_model_path: models

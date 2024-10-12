@@ -1,0 +1,92 @@
+schema: '2.0'
+stages:
+  data_download:
+    cmd: python src/stages/stage_0_data_download.py --config=params.yaml
+    deps:
+    - path: params.yaml
+      hash: md5
+      md5: 1ad0690e38a0c7f739347dcacca1a5c5
+      size: 1277
+      isexec: true
+    - path: src/stages/stage_0_data_download.py
+      hash: md5
+      md5: 744d5f67337f60dc3d8c0d3ccc7d5d53
+      size: 575
+    params:
+      params.yaml:
+        paths.dataset_path: dataset/image-classification-and-yolo-dataset/Ambulance_Car
+        paths.dataset_url: 
+          https://www.kaggle.com/datasets/amansingh0000000/image-classification-and-yolo-dataset/data
+        paths.raw_dataset_dir: dataset/raw
+    outs:
+    - path: dataset/raw
+      hash: md5
+      md5: 92c0ed906ef663cbeba0e8268a25ae97.dir
+      size: 368454056
+      nfiles: 2276
+  data_preprocess_augmentation:
+    cmd: python src/stages/stage_1_data_preprocess_augmentation.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_1_data_preprocess_augmentation.py
+      hash: md5
+      md5: 2de7e45e2e26a75bcfc0613d67789ebe
+      size: 5543
+    params:
+      params.yaml:
+        paths.labels_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Label
+        paths.preprocess_dataset: dataset/preprocess
+        paths.train_dir: dataset/raw/image-classification-and-yolo-dataset/Ambulance_Car/Train
+    outs:
+    - path: dataset/preprocess/test
+      hash: md5
+      md5: d35c4e83d43156eb52fdfc0fba15e41b.dir
+      size: 54160428
+      nfiles: 557
+    - path: dataset/preprocess/train
+      hash: md5
+      md5: c4e017b48cb5519da9faac99ff6c72d8.dir
+      size: 213306856
+      nfiles: 2227
+  train:
+    cmd: python src/stages/stage_2_train.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_2_train.py
+      hash: md5
+      md5: bc65bdb4f6a248246a5346da2360e5b3
+      size: 1428
+    params:
+      params.yaml:
+        paths.preprocessed_train: 
+          /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/train
+        paths.preprocessed_val: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/test
+        paths.trained_model_path: models
+    outs:
+    - path: models/lenet.keras
+      hash: md5
+      md5: e5eb7e7c95e3c0545edf192b83466c28
+      size: 313748262
+    - path: models/mini_vgg_net.keras
+      hash: md5
+      md5: c4471f17f66bcb34774181f0238d5929
+      size: 1234026525
+    - path: models/shallownet.keras
+      hash: md5
+      md5: 1ed25c4516186cb0b76a27c163187da7
+      size: 19298965
+  evaluate:
+    cmd: python src/stages/stage_3_evaluate.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_3_evaluate.py
+      hash: md5
+      md5: a2df281bd9a573d0bb63d664efd31eab
+      size: 3649
+    params:
+      params.yaml:
+        evaluate.reports_dir: src/reports
+        paths.trained_model_path: models
+    outs:
+    - path: src/reports/results
+      hash: md5
+      md5: 6ff3524228a1a0c7f717fa038299f292.dir
+      size: 54078
+      nfiles: 6
