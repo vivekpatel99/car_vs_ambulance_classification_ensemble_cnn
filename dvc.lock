@@ -5,8 +5,8 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: c39c9f6eed80f5973c20d6bd3f567e8a
-      size: 1238
+      md5: 1ad0690e38a0c7f739347dcacca1a5c5
+      size: 1277
       isexec: true
     - path: src/stages/stage_0_data_download.py
       hash: md5
@@ -73,3 +73,20 @@ stages:
       hash: md5
       md5: 1ed25c4516186cb0b76a27c163187da7
       size: 19298965
+  evaluate:
+    cmd: python src/stages/stage_3_evaluate.py --config=params.yaml
+    deps:
+    - path: src/stages/stage_3_evaluate.py
+      hash: md5
+      md5: a2df281bd9a573d0bb63d664efd31eab
+      size: 3649
+    params:
+      params.yaml:
+        evaluate.reports_dir: src/reports
+        paths.trained_model_path: models
+    outs:
+    - path: src/reports/results
+      hash: md5
+      md5: 6ff3524228a1a0c7f717fa038299f292.dir
+      size: 54078
+      nfiles: 6

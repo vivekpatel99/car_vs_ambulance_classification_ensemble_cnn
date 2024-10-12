@@ -5,8 +5,9 @@ import logging
 import os
 from pathlib import Path
 
+from matplotlib import pyplot as plt
 import numpy as np
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay, classification_report, confusion_matrix
 from utils.logs import get_logger
 from utils import utils
 from utils.image_data_loader import ImageDataLoader
@@ -48,19 +49,35 @@ def evaluate_models(params_yaml: str = 'params.yaml') -> None:
             all_labels.extend(batch_labels.numpy())
 
         report = classification_report(
-            all_labels, all_predictions, target_names=test_ds.class_names)
-        confusion_mat = confusion_matrix(all_labels, all_predictions)
+            all_labels, all_predictions, target_names=test_ds.class_names, output_dict=True)
+
+        confusion_mat = confusion_matrix(
+            y_true=all_labels,  y_pred=all_predictions)
+        confusion_disp = ConfusionMatrixDisplay(confusion_matrix=confusion_mat,
+                                                display_labels=test_ds.class_names)
 
         metrics_dict['classification_report'] = report
         metrics_dict['confusion_matrix'] = confusion_mat
 
-        result_dump_path = f'{config.evaluate.reports_dir}/{tuned_models[cnt].split("/")[1].replace(".keras", "")}_metrics.json'
+        # Convert NumPy arrays to lists
+        for key, value in metrics_dict.items():
+            if isinstance(value, np.ndarray):
+                metrics_dict[key] = value.tolist()
+
+        result_dump_path = f'{config.evaluate.results_dir}/{tuned_models[cnt].split("/")[1].replace(".keras", "")}'
+
+        metrics_json_path = f'{result_dump_path}_metrics.json'
 
         # Create the directory if it doesn't exist
-        # os.makedirs(os.path.dirname(result_dump_path), exist_ok=True)
+        os.makedirs(os.path.dirname(metrics_json_path), exist_ok=True)
+
+        confusion_disp.plot()
+        plt.savefig(f'{result_dump_path}_confusion_matrix.png')
+
+        log.info(f'Saving evaluation metrics to: {result_dump_path}')
 
         try:
-            with open(result_dump_path, "w") as fp:
+            with open(metrics_json_path, "w") as fp:
                 json.dump(
                     obj=metrics_dict,
                     fp=fp
@@ -72,7 +89,6 @@ def evaluate_models(params_yaml: str = 'params.yaml') -> None:
         log.info(
             f'Classification report and confusion matrix saved for model: {tuned_models[cnt]}')
         log.info(f'Evaluation completed for model: {tuned_models[cnt]}')
-        break
 
 
 if __name__ == '__main__':

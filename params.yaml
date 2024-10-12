@@ -29,7 +29,8 @@ train:
 
 evaluate:
   metrics: ["accuracy", "precision", "recall"]
-  reports_dir: src/report
+  reports_dir: src/reports
+  results_dir: src/reports/results
   confusion_matrix_image: "confusion_matrix.png"
 
 paths:

@@ -42,7 +42,7 @@ stages:
     deps:
       - src/stages/stage_3_evaluate.py
     params:
-      - paths.preprocessed_test
       - paths.trained_model_path
+      - evaluate.reports_dir
     outs:
-      - reports
+      - src/reports/results
