@@ -36,6 +36,7 @@ stages:
       - models/lenet.keras
       - models/mini_vgg_net.keras
       - models/shallownet.keras
+      - models/tuned_hyperparams.json
 
   evaluate:
     cmd: python src/stages/stage_3_evaluate.py --config=params.yaml

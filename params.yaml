@@ -6,7 +6,7 @@ data_split:
 
 train:
   image_size: 224
-  batch_size: 32
+  batch_size: 16
   loss: "binary_crossentropy"
   if_fine_tune: true
   fine_tune_args:
@@ -43,3 +43,4 @@ paths:
   preprocessed_train: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/train
   preprocessed_val: /workspaces/car_vs_ambulance_classification_ensemble_cnn/dataset/preprocess/test
   trained_model_path: models
+  tune_hyperparameters_path: models/tuned_hyperparams.json

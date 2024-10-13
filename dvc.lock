@@ -5,8 +5,8 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: 1ad0690e38a0c7f739347dcacca1a5c5
-      size: 1277
+      md5: d5fa3b2bc8a71e0f967d59e566a30d9c
+      size: 1336
       isexec: true
     - path: src/stages/stage_0_data_download.py
       hash: md5

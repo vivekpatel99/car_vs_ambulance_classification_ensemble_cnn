@@ -1,5 +1,9 @@
 # car_vs_ambulance_classification_ensemble_cnn
-I am going to use 3 different CNN models to increase accuracy for classifying car or ambulance.
+
+# Project Overview
+====================
+
+This project aims to develop a deep learning model for image classification using Convolutional Neural Networks (CNNs). The project is designed to be modular and extensible, allowing for easy addition or removal of new models in the future.
 
 ![](resources/0a1cfb999655af56.jpg)
 
@@ -18,17 +22,25 @@ Here’s a bullet-point description of the dataset:
                Train file is for different types of Cars and Ambulances images. \
                Label file for the labels,which show the labels regarding about the images. 
 
-
 ## Planning
-* Downloading, augmenting storing the data 
-* Create 3 CNN models using Template pattern to add or remove more models in futures
-* Traing and Hyperparameter tunning these models using Keras Tuner and storing the model into model diractory
-* Evaluate the models
+------------
 
+### Steps
 
-# HowTo
-## Setup
-1. Install VS Code 
-2. Install Dev Containers (ms-vscode-remote.remote-containers) and python extensions (ms-python.autopep8)
-3. Press Ctrl + P and type `open container`
-    It will pull official Tensorflow docker image from Nvidia and setup the project by install requirements.txt
+* **Data Preparation**: Downloading, augmenting, and storing the dataset
+* **Model Development**: Creating three CNN models using the Template pattern to enable easy addition or removal of new models
+* **Hyperparameter Tuning**: Training and tuning the models using Keras Tuner and storing the optimized models in the `model` directory
+* **Model Evaluation**: Evaluating the performance of the trained models
+
+## Getting Started
+-------------------
+
+### Setup
+
+1. **Install VS Code**: Download and install Visual Studio Code from the official website.
+2. **Install Dev Containers**: Install the Dev Containers extension (ms-vscode-remote.remote-containers) and the Python extension (ms-python.autopep8).
+3. **Open Container**: Press `Ctrl + P` and type `open container`. This will pull the official TensorFlow Docker image from Nvidia and set up the project by installing the requirements specified in `requirements.txt`.
+4. **Update Model and Hyperparameters**: Add or update the CNN model by inheriting the base model class. Update the `params.yaml` file with the desired hyperparameters for tuning (e.g., `train.fine_tune_args`).
+5. **Run Experiments**: Run `dvc repro` to execute the experiments for hyperparameter tuning.
+
+Note: In Markdown format, headings are denoted by `#` symbols, and lists are denoted by `*` symbols. I also used `###` to denote subheadings. Let me know if you'd like me to make any further changes!
