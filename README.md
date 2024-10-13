@@ -20,9 +20,11 @@ Here’s a bullet-point description of the dataset:
 
 
 ## Planning
-* Dataset also contain coordinates for each object in the image
-* First I will try to work on only Object classification problem
-* Then i will try to use those coordinates and make this problem as an Object detection
+* Downloading, augmenting storing the data 
+* Create 3 CNN models using Template pattern to add or remove more models in futures
+* Traing and Hyperparameter tunning these models using Keras Tuner and storing the model into model diractory
+* Evaluate the models
+
 
 # HowTo
 ## Setup
