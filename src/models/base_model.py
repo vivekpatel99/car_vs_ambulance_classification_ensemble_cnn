@@ -12,6 +12,25 @@ from tensorflow.keras import optimizers
 
 class BaseModel(ABC):
     def __init__(self) -> None:
+        """
+        Initializes the BaseModel object.
+
+        The BaseModel object is initialized with the following
+        properties:
+        - _model: the compiled model
+        - _history: the history of the training process
+        - log: the logger object
+        - params: the parameters of the experiment
+        - model_params: the parameters of the model
+        - image_size: the size of the input images
+        - loss: the loss function used during training
+        - batch_size: the batch size used during training
+        - epochs: the number of epochs used during training
+        - metrics: the metrics used during training
+        - learning_rate: the learning rate used during training
+        - optimizer: the optimizer used during training
+        - optimizer_name: the name of the optimizer used during training
+        """
         super().__init__()
         self._model = None
         self._history = None
@@ -32,7 +51,7 @@ class BaseModel(ABC):
         """Abstract method to build the model architecture."""
         pass
 
-    def get_summary(self):  # -> Any:
+    def get_summary(self) -> None:
         """Get the summary of the model architecture."""
         return self._model.summary() if self._model else None
 

@@ -28,12 +28,14 @@ def train(params_yaml: str = 'params.yaml') -> None:
     params_config = utils.read_yaml(yaml_path=params_yaml)
 
     image_loader = ImageDataLoader(params_yaml=params_yaml)
+
     # Load the dataset with prefetching
     train_ds, val_ds = image_loader.load_image_dataset(prefetch=False)
 
     # Train the model and get the trained model
     models = train_model(config=params_config,
-                         train_ds=train_ds, val_ds=val_ds)
+                         train_ds=train_ds,
+                         val_ds=val_ds)
 
     # Save the trained model
     for model_name, model in models.items():

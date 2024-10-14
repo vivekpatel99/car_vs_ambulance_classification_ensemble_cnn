@@ -43,8 +43,8 @@ def train_model(config: ConfigBox, train_ds, val_ds) -> dict[str, Object]:
                 model.compile() : tensorflow.keras.Model
                     The compiled model with the specified hyperparameters.
                 """
-                optimizer_name = hp.Choice(
-                    'optimizer', list(config.train.fine_tune_args.optimizers))
+                optimizer_name = hp.Choice('optimizer',
+                                           list(config.train.fine_tune_args.optimizers))
                 learning_rate = hp.Float('learning_rate',
                                          min_value=config.train.fine_tune_args.lr.min,
                                          max_value=config.train.fine_tune_args.lr.max,
@@ -73,8 +73,7 @@ def train_model(config: ConfigBox, train_ds, val_ds) -> dict[str, Object]:
                     optimizer_name=optimizer_name,
                     learning_rate=learning_rate,
                     loss=config.train.loss,
-                    metrics=list(
-                        config.evaluate.metrics),
+                    metrics=list(config.evaluate.metrics),
                     image_size=config.train.image_size)
 
                 _model.build()

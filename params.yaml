@@ -22,10 +22,10 @@ train:
     epochs: 2
   mini_vgg_net:
     base_lr: 0.01
-    epochs: 10
+    epochs: 2
   shallownet:
     base_lr: 0.01
-    epochs: 10
+    epochs: 2
 
 evaluate:
   metrics: ["accuracy", "precision", "recall"]

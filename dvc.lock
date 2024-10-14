@@ -52,8 +52,8 @@ stages:
     deps:
     - path: src/stages/stage_2_train.py
       hash: md5
-      md5: bc65bdb4f6a248246a5346da2360e5b3
-      size: 1428
+      md5: e8f351be4d5644116fe66a97ff591178
+      size: 1453
     params:
       params.yaml:
         paths.preprocessed_train: 
@@ -63,16 +63,20 @@ stages:
     outs:
     - path: models/lenet.keras
       hash: md5
-      md5: e5eb7e7c95e3c0545edf192b83466c28
-      size: 313748262
+      md5: 44a51cff35e9a6cc9787a0b8cff92410
+      size: 313748263
     - path: models/mini_vgg_net.keras
       hash: md5
-      md5: c4471f17f66bcb34774181f0238d5929
-      size: 1234026525
+      md5: 11c4a0cbc9cf1317af34bfdc89868106
+      size: 1234026526
     - path: models/shallownet.keras
       hash: md5
-      md5: 1ed25c4516186cb0b76a27c163187da7
-      size: 19298965
+      md5: 4ecc7e844aa3b8dd6f11a63c2188a3f7
+      size: 6444044
+    - path: models/tuned_hyperparams.json
+      hash: md5
+      md5: 5977bc91b06c14b29df5600f82cf68d6
+      size: 224
   evaluate:
     cmd: python src/stages/stage_3_evaluate.py --config=params.yaml
     deps:
