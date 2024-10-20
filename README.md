@@ -5,7 +5,8 @@
 
 This project aims to develop a deep learning model for image classification using Convolutional Neural Networks (CNNs). The project is designed to be modular and extensible, allowing for easy addition or removal of new models in the future.
 
-![](resources/0a1cfb999655af56.jpg)
+![Average Voting Strategy](resources/Predictions_with_Average_Voting_Strategy.png)
+![Weighted Voting Strategy](resources/Predictions_with_Weighted_Voting_Strategy.png)
 
 Here’s a bullet-point description of the dataset:
 
@@ -21,6 +22,8 @@ Here’s a bullet-point description of the dataset:
 **Use Cases**: Ideal for projects such as traffic monitoring, emergency vehicle detection, and automated vehicle recognition systems. \
                Train file is for different types of Cars and Ambulances images. \
                Label file for the labels,which show the labels regarding about the images. 
+
+
 
 ## Planning
 ------------
@@ -43,4 +46,3 @@ Here’s a bullet-point description of the dataset:
 4. **Update Model and Hyperparameters**: Add or update the CNN model by inheriting the base model class. Update the `params.yaml` file with the desired hyperparameters for tuning (e.g., `train.fine_tune_args`).
 5. **Run Experiments**: Run `dvc repro` to execute the experiments for hyperparameter tuning.
 
-Note: In Markdown format, headings are denoted by `#` symbols, and lists are denoted by `*` symbols. I also used `###` to denote subheadings. Let me know if you'd like me to make any further changes!
