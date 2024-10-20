@@ -17,6 +17,7 @@ class ImageDataLoader:
         self.train_dir = params_config.paths.preprocessed_train
         self.val_dir = params_config.paths.preprocessed_val
         self.log = get_logger(__name__, log_level=logging.INFO)
+        self.class_names = None
 
     @ensure_annotations
     def load_image_dataset(self, prefetch: bool = True) -> tuple:
@@ -40,6 +41,7 @@ class ImageDataLoader:
                                                    image_size=(self.train_cfg.image_size,
                                                                self.train_cfg.image_size),
                                                    batch_size=self.train_cfg.batch_size)
+        self.class_names = self.train_ds.class_names
         if prefetch:
             # https://www.tensorflow.org/tutorials/images/classification
             AUTOTUNE = tf.data.AUTOTUNE
